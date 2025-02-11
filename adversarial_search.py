@@ -56,11 +56,11 @@ def minimax_helper(
                             A state is expanded when get_available_actions(state) is called.
 
     """
-    if cutoff_depth < 1:
-        value = asp.heuristic(current_state)
-        return (value, None, stats)
     if asp.is_terminal_state(current_state):
         value = asp.get_result(current_state)
+        return (value, None, stats)
+    if cutoff_depth < 1:
+        value = asp.heuristic(current_state)
         return (value, None, stats)
     else:
         if current_state.player_to_move() == 0:
@@ -126,8 +126,8 @@ def alpha_beta_helper(
         cutoff_depth - the maximum search depth, where 0 is the start state. 
                     Depth 1 is all the states reached after a single action from the start state (1 ply).
                     cutoff_depth will always be greater than 0.
-        alpha: FIXME
-        beta: FIXME
+        alpha: minimum score that the maximizing player is assured of
+        beta: maximum score that the minimizing player is assured of
     Output:
         a float representing the value of the action returned
         an action (an element of asp.get_available_actions(asp.get_start_state()))
@@ -136,13 +136,11 @@ def alpha_beta_helper(
                             A state is expanded when get_available_actions(state) is called.
 
     """
-    # alpha = float('-inf')
-    # beta = float('inf')
-    if cutoff_depth < 1:
-        value = asp.heuristic(current_state)
-        return (value, None, stats)
     if asp.is_terminal_state(current_state):
         value = asp.get_result(current_state)
+        return (value, None, stats)
+    if cutoff_depth < 1:
+        value = asp.heuristic(current_state)
         return (value, None, stats)
     actions = asp.get_available_actions(current_state)
     stats["states_expanded"] += 1
@@ -174,4 +172,3 @@ def alpha_beta_helper(
                 return value, best_action, stats
             beta = min(beta, value)
     return value, best_action, stats
-
