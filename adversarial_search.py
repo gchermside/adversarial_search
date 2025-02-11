@@ -13,8 +13,6 @@ def minimax(asp: HeuristicAdversarialSearchProblem[GameState, Action], cutoff_de
     Implement the minimax algorithm on ASPs, assuming that the given game is
     both 2-player and zero-sum.
 
-
-
     Input:
         asp - a HeuristicAdversarialSearchProblem
         cutoff_depth - the maximum search depth, where 0 is the start state. 
